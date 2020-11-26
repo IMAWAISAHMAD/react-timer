@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState,useEffect} from 'react';
+import Timer from './components/Timer/Timer'
+import Controls from './components/Controls/Controls'
+import CalculateTime from './components/Utility/CalculateTime'
 import './App.css';
 
+
 function App() {
+  const [seconds,setSeconds] = useState<number>(0);
+  const [timerArray,setTimerArray] = useState<Array<number|string>>([]);
+
+  useEffect(()=>{
+    let timer:Array<number|string> = CalculateTime(seconds);
+    setTimerArray(timer)
+  },[seconds])
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Timer timer={timerArray}/>
+      <Controls setSeconds={setSeconds}/> 
     </div>
   );
 }
