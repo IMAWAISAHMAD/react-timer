@@ -30,7 +30,8 @@ jobs:
       with:
        # Yarn command
        cmd: install
-       run: yarn test
+    - name: Perform Tests Before Deployment
+      run: yarn test
     - name: Creating Build
       run: yarn build
 
